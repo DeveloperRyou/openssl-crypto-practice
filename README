@@ -1,3 +1,31 @@
 Name : Ryou Sungmin
 Student ID : 2018147553
 Description :
+Program has structures which are t_cryp.
+t_cryp has information about file pointers, file names, file contents, file length.
+
+After initiating t_cryp, program start to parse arguments.
+In parser, it checks argument options and set file names.
+
+After parsing, program open and read file.
+Program throws error if opening file has problems.
+Program check the file length by fseek, ftell and allocate memory to read file contents.
+Program throws error if reading file has problems.
+
+After read files, program start to encrypt / decrypt files.
+
+Encrypt :
+First, program make AES-256 key by key file.
+By this AES key, program encrypts file by AES_cbc_encrypt.
+After encrypt file by AES-256, program make hmac by HMAC with EVP_sha256().
+Finally, program writes encrypt file as outfile, hmac as tagfile.
+
+Decrpyt :
+First, program make AES-256 key by key file.
+Then, program make hmac by HMAC with EVP_sha256().
+Program check hmac and tagfile.
+If it is different, program print VERIFICATION FAILURE and exit with 1.
+If it is same, program decrypts file by AES_cbc_encrypt.
+After decrypt, program writes decrypt file as outfile.
+
+All crypto is finished, program free allocated memory and return 0.
