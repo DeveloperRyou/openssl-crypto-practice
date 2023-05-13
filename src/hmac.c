@@ -42,16 +42,6 @@ void make_hmac(t_cryp *cryp)
 	// write to tag
 	for (int i = 0; i < strlen((char *)cryp->tag); i++)
 		fprintf(cryp->tag_fp, "%c", cryp->tag[i]);
-
-	// print
-	for (int i = 0; i < cryp->infile_length; i++)
-		printf("%02x", cryp->infile[i]);
-	printf("\n");
-	for (int i = 0; i < cryp->outfile_length; i++)
-		printf("%02x", cryp->outfile[i]);
-	printf("\n");
-	for (int i = 0; i < strlen((char *)cryp->tag); i++)
-		printf("%02x", cryp->tag[i]);
 }
 
 void check_hmac(t_cryp *cryp)
@@ -93,14 +83,4 @@ void check_hmac(t_cryp *cryp)
 	open_outfile(cryp, cryp->outfile_filename);
 	// write to outfile
 	fprintf(cryp->outfile_fp, "%s", cryp->outfile);
-
-	// print
-	for (int i = 0; i < cryp->infile_length; i++)
-		printf("%02x", cryp->infile[i]);
-	printf("\n");
-	for (int i = 0; i < cryp->outfile_length; i++)
-		printf("%02x", cryp->outfile[i]);
-	printf("\n");
-	for (int i = 0; i < strlen((char *)cryp->tag); i++)
-		printf("%02x", cryp->tag[i]);
 }
