@@ -2,10 +2,11 @@ NAME = cryp
 CC = gcc
 
 # if you use mac
-INCLUDE_MAC=-I/opt/homebrew/opt/openssl@3/include
-LINK_MAC=-L/opt/homebrew/opt/openssl@3/lib -lssl -lcrypto
+# INCLUDE_MAC=-I/opt/homebrew/opt/openssl@3/include
+# LINK_MAC=-L/opt/homebrew/opt/openssl@3/lib -lssl -lcrypto
+LINK = -lssl -lcrypto
 
-INCLUDE = ./include
+INCLUDE = -I./include
 
 SRCS_DIR = ./src
 SRCS = src/main.c \
@@ -18,10 +19,10 @@ SRCS = src/main.c \
 OBJS = $(SRCS:.c=.o)
 
 $(NAME) : $(OBJS)
-	$(CC) $(LINK_MAC) $(OBJS) -o $(NAME)
+	$(CC) $(OBJS) -o $(NAME) $(LINK)
 
 %.o : %.c
-	$(CC) -I$(INCLUDE) $(INCLUDE_MAC) -c $< -o $@
+	$(CC) $(INCLUDE) -c $< -o $@
 
 all : $(NAME)
 
